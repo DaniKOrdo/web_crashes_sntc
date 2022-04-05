@@ -12,13 +12,18 @@ def bot_activo(message):
     msg = ''' ✅ Bot activo '''
     bot.send_message(message.chat.id, msg)
 
-@bot.message_handler(commands=['status', 'estado', 'riera'])
+@bot.message_handler(commands=['status', 'estado', tlg_token.rraw])
 def bot_status(message):
-    msg = get_WebR()
+    msg = get_Web(tlg_token.rra)
     bot.send_message(message.chat.id, msg)
 
-def get_WebR():
-    r = requests.get(tlg_token.rra)
+@bot.message_handler(commands=[tlg_token.sntw])
+def bot_status(message):
+    msg = get_Web(tlg_token.snt)
+    bot.send_message(message.chat.id, msg)
+
+def get_Web(web):
+    r = requests.get(web)
     if r.status_code == 200:
         return '✅ Staus Code: ' + str(r.status_code)
     return '❌ Staus Code: ' + str(r.status_code)
@@ -41,6 +46,8 @@ def report():
     if r.status_code != 200:
         message = '⚠️Web ' + tlg_token.rraw + ' caida: ' + str(r.status_code)
         bot_send_text(message)
+    #else:
+    #    bot_send_text("Ok")
 
 
 # __main__ #
