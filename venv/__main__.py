@@ -1,3 +1,4 @@
+from email import message
 import requests
 import schedule
 import telebot
@@ -49,12 +50,16 @@ def report():
     #else:
     #    bot_send_text("Ok")
 
+def check_bot_status():
+    message = '✅ Bot funcionando'
+
 
 # __main__ #
 
 if __name__ == '__main__':
         
     schedule.every(5).minutes.do(report)
+    schedule.every().day.at("09:00").do(check_bot_status)
     bot.polling(none_stop=True)
 
     while True:
