@@ -1,8 +1,10 @@
-from email import message
 import requests
 import schedule
 import telebot
 import tlg_token
+import time;
+
+localTime = time.asctime(time.localtime(time.time()))
 
 # Entrada de mensaje /comando #
 
@@ -27,7 +29,7 @@ def get_Web(web):
     r = requests.get(web)
     if r.status_code == 200:
         return '✅ Staus Code: ' + str(r.status_code)
-    return '❌ Staus Code: ' + str(r.status_code)
+    return '❌ Staus Code: ' + str(r.status_code) + ' ' + localTime
 
 
 # Mensajes automaticos  #
@@ -47,17 +49,18 @@ def report():
     if r.status_code != 200:
         message = '⚠️Web ' + tlg_token.rraw + ' caida: ' + str(r.status_code)
         bot_send_text(message)
-    #else:
-    #    bot_send_text("Ok")
+    else:
+        bot_send_text("Ok")
+        print('Todo ok: ' + localTime)
 
 def check_bot_status():
     message = '✅ Bot funcionando'
-
+    bot_send_text(message)
 
 # __main__ #
 
 if __name__ == '__main__':
-        
+
     schedule.every(5).minutes.do(report)
     schedule.every().day.at("09:00").do(check_bot_status)
     bot.polling(none_stop=True)
