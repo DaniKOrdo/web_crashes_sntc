@@ -4,8 +4,6 @@ import telebot
 import tlg_token
 import time;
 
-localTime = time.asctime(time.localtime(time.time()))
-
 # Entrada de mensaje /comando #
 
 bot = telebot.TeleBot(tlg_token.token)
@@ -26,6 +24,7 @@ def bot_status(message):
     bot.send_message(message.chat.id, msg)
 
 def get_Web(web):
+    localTime = time.asctime(time.localtime(time.time()))
     r = requests.get(web)
     if r.status_code == 200:
         return '✅ Staus Code: ' + str(r.status_code)
@@ -45,6 +44,7 @@ def bot_send_text(bot_message):
     return response
 
 def report():
+    localTime = time.asctime(time.localtime(time.time()))
     r = requests.get(tlg_token.rra)
     if r.status_code != 200:
         message = '⚠️Web ' + tlg_token.rraw + ' caida: ' + str(r.status_code)
