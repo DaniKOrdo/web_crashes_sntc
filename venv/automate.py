@@ -28,14 +28,14 @@ def report():
 
 
 def check_bot_status():
-    message = '✅ Bot funcionando'
+    message = '✅ Bot funcionando 9:00'
     bot_send_text(message)
     
 
 if __name__ == '__main__':
         
     schedule.every(5).minutes.do(report)
-    schedule.every().day.at("09:00").do(check_bot_status)
+    schedule.every().day.at("9:00").do(check_bot_status)
 
     while True:
         schedule.run_pending()
