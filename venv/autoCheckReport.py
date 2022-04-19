@@ -1,8 +1,19 @@
+import logging
 import requests
 import schedule
-import time;
+import time
 import dk_token as dk
 import httpconnection as hc
+
+# Enable logging
+logging.basicConfig(
+    filename='autoCheckReport.log', 
+    encoding='utf-8',
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
+    level=logging.INFO
+)
+
+logger = logging.getLogger(__name__)
 
 def bot_send_text(bot_message):
     
