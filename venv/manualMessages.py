@@ -46,6 +46,20 @@ def check_s(update: Update, context: CallbackContext):
         print('Web ' + dk.SNT_N + ' Caida ' + local_time)
         update.message.reply_text(message)
 
+def check_all_web(update: Update, context: CallbackContext):
+    local_time = time.asctime(time.localtime(time.time()))
+    web_name = update.message.text.split(' ')[1]
+    www_web =  web_name
+
+
+    if hc.connection(www_web) == True:
+        message = '✅ Web ' + www_web + ' Ok'
+        update.message.reply_text(message)
+    else:
+        message = '⚠️Web ' + www_web + ' Caida⚠️ ' + local_time
+        print('Web ' + www_web + ' Caida ' + local_time)
+        update.message.reply_text(message)
+
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -58,6 +72,7 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("bot", bot))
     dispatcher.add_handler(CommandHandler(dk.RER_N, check_r))
     dispatcher.add_handler(CommandHandler(dk.SNT_N, check_s))
+    dispatcher.add_handler(CommandHandler("web", check_all_web))
 
     # Start the Bot
     updater.start_polling()
