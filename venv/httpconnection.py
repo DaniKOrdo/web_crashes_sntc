@@ -1,20 +1,18 @@
-import http.client
+import requests
 
 def connection(web):
-    conn = http.client.HTTPSConnection(web)
+    web_https = 'http://' + web
+    # print(web_https)
+
     try:
-        print("conn.req " + conn.request("HEAD", "/"))
-        conn.request("HEAD", "/")
-        
-        res = conn.getresponse().status
-        print("status:" + res)
-        if(res == 200):
-            print("bien" + res)
-            return True
-        else:
-            print("caida" + res)
-            return False
+        # print("try")
+        response = requests.get(web_https)
     except:
-        print("MAL")
-        return False
+        # print("Error")
+        return -10
     
+    # print("post exception")
+    # print(response.status_code)
+    
+    return response.status_code
+ 
